@@ -1,0 +1,133 @@
+[
+  {
+    "name": "case-1",
+    "edges": [
+      [
+        "A",
+        "F"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "G"
+      ],
+      [
+        "B",
+        "H"
+      ],
+      [
+        "C",
+        "D"
+      ],
+      [
+        "C",
+        "F"
+      ],
+      [
+        "C",
+        "G"
+      ],
+      [
+        "C",
+        "H"
+      ],
+      [
+        "D",
+        "E"
+      ],
+      [
+        "D",
+        "H"
+      ],
+      [
+        "D",
+        "I"
+      ],
+      [
+        "F",
+        "G"
+      ],
+      [
+        "H",
+        "I"
+      ]
+    ],
+    "expectedReward": 0.357143,
+    "expectedScore": 16.07
+  },
+  {
+    "name": "case-2",
+    "edges": [
+      [
+        "A",
+        "F"
+      ],
+      [
+        "A",
+        "I"
+      ],
+      [
+        "B",
+        "G"
+      ],
+      [
+        "C",
+        "G"
+      ],
+      [
+        "D",
+        "E"
+      ],
+      [
+        "D",
+        "H"
+      ],
+      [
+        "G",
+        "H"
+      ]
+    ],
+    "expectedReward": 0.272727,
+    "expectedScore": 12.27
+  },
+  {
+    "name": "case-3",
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "C",
+        "F"
+      ],
+      [
+        "D",
+        "E"
+      ],
+      [
+        "F",
+        "I"
+      ],
+      [
+        "G",
+        "H"
+      ]
+    ],
+    "expectedReward": 0.571429,
+    "expectedScore": 25.71
+  },
+  {
+    "name": "case-4",
+    "edges": [],
+    "expectedReward": 0,
+    "expectedScore": 0
+  }
+]

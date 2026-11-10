@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+*.log
+.env
+.env.*
+coverage/
+dist/
+*.tgz
+.bak/
+CONTRACTS.md

@@ -1,0 +1,58 @@
+{
+  "name": "dsh-model-radar",
+  "version": "0.1.0",
+  "description": "Model Radar: a four-task 150-point model intelligence benchmark plus real-world performance scoring for DeepSeek Harness.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "lib/*.js",
+    "locale/*.json",
+    "icon.svg",
+    "assets/**/*",
+    "README.md",
+    "LICENSE",
+    "screenshots.json"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek",
+    "model-benchmark",
+    "benchmark",
+    "leaderboard",
+    "model-radar",
+    "performance",
+    "cordis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chip-G0202/dsh-model-radar.git"
+  },
+  "homepage": "https://github.com/Chip-G0202/dsh-model-radar#readme",
+  "engines": {
+    "dsh": ">=0.2.2-rc.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}

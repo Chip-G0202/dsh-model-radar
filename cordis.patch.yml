@@ -1,0 +1,31 @@
+# dsh-model-radar — bundle layer.
+#
+# One Host+Client entry: the Host half exposes the model catalog, runs the
+# four-task benchmark (judge model as the session main model, candidate models
+# as subagent runs), judges and scores answers, and folds session events into a
+# 0–1000 performance report. The Client half renders the sidebar "Model Radar"
+# page with ranking, performance and history views.
+- insert:
+    - id: dsh-model-radar
+      name: 'dsh-model-radar'
+      config:
+        # Judge. Leave empty to use the first model in the live catalog; set an
+        # explicit provider/model/reasoningEffort to pin one.
+        judge:
+          provider: ''
+          model: ''
+          reasoningEffort: ''
+        models: []
+        maxCombos: 0
+        maxParallelModels: 3
+        perTaskTimeoutMs: 10800000
+        perBatchTimeoutMs: 172800000
+        autoRetries: 1
+        judgeMaxAttempts: 2
+        speedRuns: 3
+        dataDir: ''
+        retentionBatches: 200
+        pricing:
+          usdToCny: 7.1
+          fallbackModel: deepseek-v4.1-flash
+          models: {}
