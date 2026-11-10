@@ -124,10 +124,14 @@
 
 需要 DSH Desktop **0.2.2-rc.1 或更新版本**（开发与验证环境为 0.2.2-rc.1）。
 
-从 GitHub 安装：
+从 GitHub 安装（任一即可）：
 
 ```bash
-dsh plugin --profile desktop add Chip-G0202/dsh-model-radar
+# 1) 直接从 GitHub 仓库安装
+dsh plugin --profile desktop add github:Chip-G0202/dsh-model-radar
+
+# 2) 或安装 Release 里预构建的 tarball
+dsh plugin --profile desktop add https://github.com/Chip-G0202/dsh-model-radar/releases/latest/download/dsh-model-radar.tgz
 ```
 
 也可以在 DSH 的「插件 → 发现」里搜索 `Model radar` 安装（收录后可用）。本地开发时安装目录：
