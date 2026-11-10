@@ -16,4 +16,4 @@ jobs:
       - name: Syntax check
         run: for f in index.js client.js lib/*.js; do node --check "$f" || exit 1; done
       - name: Unit tests
-        run: node --test test/
+        run: node --test test/*.test.js

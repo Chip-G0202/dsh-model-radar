@@ -221,7 +221,7 @@ dsh plugin --profile desktop add /path/to/dsh-model-radar
 
 ```bash
 for f in index.js client.js lib/*.js; do node --check "$f" || exit 1; done
-node --test test/
+node --test test/*.test.js
 ```
 
 单元测试覆盖目录/批次存储、评分、裁判 JSON 解析、隔离审计、性能折叠与设置校验，全部通过后才会发布。
@@ -248,7 +248,7 @@ node --test test/
 | `icon.svg` / `assets/icon/*.png` | 插件图标与市场卡片位图 |
 | `screenshots.json` | 市场截图清单（5 张） |
 | `LICENSE` | MIT |
-| `test/` | 单元测试（131 项） |
+| `test/` | 单元测试（132 项） |
 | `.github/workflows/ci.yml` | 语法检查 + 单元测试 |
 
 ---
