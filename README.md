@@ -1,5 +1,7 @@
 # dsh-model-radar（模型雷达 / Model Radar）
 
+[English](README.en.md) | 简体中文
+
 一个独立的 DSH（DeepSeek Harness）插件：**四题 150 分模型智商评测** + **按模型 × 推理档位统计的真实性能评分**。
 
 - 手动勾选「模型 × 推理档位」，跑 codexradar 式四题：秦始皇 60 / 庞贝 45 / 鹈鹕 22.5 / 糖果 22.5。
@@ -38,7 +40,6 @@
 
 - 代码、UI 与文档：MIT（见 [`LICENSE`](LICENSE)）。
 - 庞贝题图、拼合参考与 gold 邻接：本仓库自行生成；底层壁画为 Wikimedia Commons 公有领域作品，来源与加工方式见 [`assets/pompeii/SOURCE.md`](assets/pompeii/SOURCE.md)。
-- 仓库不包含 RePAIR 等第三方数据集文件，也不依赖任何禁止再分发的素材。
 
 ## 界面
 
@@ -198,7 +199,7 @@ dsh plugin --profile desktop add /path/to/dsh-model-radar
 | 工具成功率 | 15 | 成功数 / 总数 | 95% → 100% |
 | 缓存命中 | 10 | cacheRead ÷ (input + cacheRead) | 50% → 100% |
 
-- 线性归一后加权和 ×10；样本 < 20 次请求显示「样本不足」+ 临时分。
+- 线性归一后加权和 ×10；样本 < 20 次请求时仍显示分数并标注「样本不足」。
 - 基线 = 前一个等长窗口的同公式分数，显示 `较基线 +x% / -x%`。
 - 受控测速：每批次每组合 3 次固定 prompt（`maxTokens: 512`），直接调用 LLM 服务，记录 TTFT / 解码 TPS / 总耗时，取中位数并附 min/max；不进入 150 分总分。
 
@@ -206,9 +207,9 @@ dsh plugin --profile desktop add /path/to/dsh-model-radar
 
 - `~/.dsh/model-radar/state.json`：批次索引 + 评测 sessionId 集合；原子写（临时文件 + rename）。
 - `~/.dsh/model-radar/batches/<id>.json`：单批完整记录（答案文本有截断上限）。
-- `~/.dsh/model-radar/runs/<batch>/<组合>/<题>/`：每题产物文件的归档副本；子智能体的实际工作目录在系统临时目录（`<tmp>/dsh-model-radar-runs/<batch>/…`），避免候选模型读到其他批次的答案。
+- `~/.dsh/model-radar/runs/<batch>/<组合>/<题>/`：每题产物文件的归档副本；子智能体的实际工作目录是每次运行独立的系统临时目录（`<tmp>/mr-run-<uuid>/`），避免候选模型读到其他批次的答案。
 - `~/.dsh/model-radar/settings.json`：设置页保存的运行时覆盖（原子写；损坏时静默回退到配置文件默认值）。
-- `~/.dsh/model-radar/perf-fold-cache.json`：性能报告的按会话折叠缓存（按会话日志 mtime/size 失效）；首次冷读约 20s，之后约 1s，可随时删除。
+- `~/.dsh/model-radar/perf-fold-cache.json`：性能报告的按会话折叠缓存（按会话日志 mtime/size 失效）；首次冷读需要扫描会话日志（耗时随会话量变化），之后通常约 1 秒；可随时删除。
 - 浏览器只访问同源 `/dsh-model-radar/*`，不接触任何凭据。
 - 不修改宿主或其它插件的配置；不发送遥测；仓库不含个人绝对路径与密钥。
 
@@ -251,14 +252,11 @@ node --test test/*.test.js
 | `locale/*.json` | 插件列表标题/描述（中英） |
 | `icon.svg` / `assets/icon/*.png` | 插件图标与市场卡片位图 |
 | `screenshots.json` | 市场截图清单（5 张） |
+| `README.md` / `README.en.md` | 中文 / English 文档 |
 | `LICENSE` | MIT |
 | `test/` | 单元测试（132 项） |
 | `.github/workflows/ci.yml` | 语法检查 + 单元测试 |
 
 ---
 
-## English summary
-
-`dsh-model-radar` is a standalone DSH plugin that benchmarks every configured model route on a four-task, 150-point suite (Qin 60, Pompeii 45, Pelican 22.5, Candy 22.5) and scores real-world performance per model × reasoning effort on a 0–1000 scale. The product shape and metric ideas are credited to [Codex Radar](https://codexradar.com/) (open client: [codex-radar/dradar](https://github.com/codex-radar/dradar)) and [Agent Speed](https://github.com/zoefix/agent-speed); this repository is an independent implementation with no affiliation to either project.
-
-The selected judge model runs as each batch's main session; every candidate combination runs as a fresh subagent session with its own working directory and a fixed file/`read_image`/`bash` toolset. Results flow back to the judge, which writes the batch summary. Scoring is programmatic for Pompeii (F1) and Candy, and rubric-based for Qin and Pelican. Batches, artifacts, speed tests and the 60-second-cached performance report are stored locally under `~/.dsh/model-radar`; the browser only talks to same-origin `/dsh-model-radar/*` routes. No credentials reach the browser and no other plugin's configuration is modified.
+> English version: [README.en.md](README.en.md)（英文版）
